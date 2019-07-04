@@ -17,8 +17,7 @@ pipeline {
 
         //DO NOT CHANGE anything below these lines. These will automatically change according to the branches
         //you build with, and the variables you have set above this step.
-        BUILD_VERSION = ${BUILDS_ALL_TIME}
-		//VersionNumber([projectStartDate: '2018-09-10', versionNumberString: '${BUILDS_ALL_TIME}', versionPrefix: ''])
+        BUILD_VERSION = '${BUILDS_ALL_TIME}' //VersionNumber([projectStartDate: '2018-09-10', versionNumberString: '${BUILDS_ALL_TIME}', versionPrefix: ''])
         DOCKER_IMAGE_URL_PREFIX = '805276130606.dkr.ecr.eu-central-1.amazonaws.com/dxl-gr-myvodafone'
         BUILD_ENVIRONMENT='dev'
         FINAL_IMAGE_NAME='${DOCKER_IMAGE_URL_PREFIX}:${BUILD_ENVIRONMENT}.${BUILD_VERSION}'
