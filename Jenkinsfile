@@ -1,5 +1,7 @@
 pipeline {
-/*
+	agent {
+        label "docker"
+    }
     environment {
         //ONLY THESE are lines you can change as the person who develops this app
         ECR_CREDENTIALS_ID = 'ecr:eu-central-1:jenkins-dxl-gr-ecr'
@@ -23,8 +25,7 @@ pipeline {
     options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
     }
-    agent any
-	*/
+    
     stages {
         stage('Java Build') {
             steps {
