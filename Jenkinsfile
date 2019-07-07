@@ -47,8 +47,8 @@ pipeline {
 							sh """
 								cd .
 								mvn clean
-								mvn package -s $MAVEN_SETTINGS -DskipTests
-
+								mvn package  -DskipTests
+								#-s $MAVEN_SETTINGS
 								#mvn sonar:sonar -s $MAVEN_SETTINGS
 							"""
                         //}
