@@ -40,7 +40,7 @@ pipeline {
 					echo final image name: $FINAL_IMAGE_NAME
 					echo deployment config folder: $DEPLOYMENT_CONFIG_FOLDER
                 """
-                configFileProvider([configFile(fileId: '4a952bc3-b38c-4486-b317-ace7bc71f539', variable: 'MAVEN_SETTINGS')]) {
+                //configFileProvider([configFile(fileId: '4a952bc3-b38c-4486-b317-ace7bc71f539', variable: 'MAVEN_SETTINGS')]) {
                     container('docker') {
                         withCredentials([usernamePassword(credentialsId: 'nexus-functional-gr-user', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                             sh """
@@ -52,7 +52,7 @@ pipeline {
         """
                         }
                     }
-                }
+                //}
             }
         }
 
@@ -105,8 +105,6 @@ def defineEnvironment() {
     echo 'we are building on ' + env.BRANCH_NAME + ' branch'
     echo 'ecr credentials ID: ' + ECR_CREDENTIALS_ID
 
-    def buildVersionName = '.' + BUILD_NUMBER + '-'
-
     /*
     Check known branches and make necessary adjustments to the environment variables.
     If no known branches are found, the "dev" deployment configuration is considered as
@@ -133,9 +131,7 @@ def defineEnvironment() {
     } else if (branchName == 'build_ga') {
         BUILD_ENVIRONMENT='ga'
         CURRENT_KUBERNETES_NAMESPACE='${KUBERNETES_NAMESPACE_stagingref}'
-        echo 'we are on the stagingref ga phase'
-        /* for the ga environment, there should not be any build version */
-        buildVersionName = '-'
+        
     } else if (branchName == 'develop') {
         BUILD_ENVIRONMENT='dev'
         CURRENT_KUBERNETES_NAMESPACE='${KUBERNETES_NAMESPACE_dev}'
@@ -147,7 +143,7 @@ def defineEnvironment() {
     echo 'build environment: ' + BUILD_ENVIRONMENT
 
     //set the final image name to be uploaded to the cluster.
-    FINAL_IMAGE_NAME='${DOCKER_IMAGE_URL_PREFIX}:' + BUILD_ENVIRONMENT + buildVersionName
+    FINAL_IMAGE_NAME='${DOCKER_IMAGE_URL_PREFIX}:' + BUILD_ENVIRONMENT + '.' + BUILD_NUMBER
     //set the deployment config folder to look for kubernetes deployments according to the master being built.
     DEPLOYMENT_CONFIG_FOLDER='./deployment/kubeconfig_' + BUILD_ENVIRONMENT
 }
