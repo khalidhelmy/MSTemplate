@@ -44,8 +44,7 @@ pipeline {
                     //container('docker') {
 						
                         //withCredentials([usernamePassword(credentialsId: 'nexus-functional-gr-user', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-							sh "will start maven build"
-                            sh """
+							sh """
 								cd .
 								mvn clean
 								mvn package -s $MAVEN_SETTINGS -DskipTests
