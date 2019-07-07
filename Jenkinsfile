@@ -42,6 +42,7 @@ pipeline {
                 """
                 //configFileProvider([configFile(fileId: '4a952bc3-b38c-4486-b317-ace7bc71f539', variable: 'MAVEN_SETTINGS')]) {
                     container('docker') {
+						sh "echo inside docker container"
                         withCredentials([usernamePassword(credentialsId: 'nexus-functional-gr-user', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                             sh """
         cd .
