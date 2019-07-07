@@ -41,18 +41,19 @@ pipeline {
 					echo deployment config folder: $DEPLOYMENT_CONFIG_FOLDER
                 """
                 //configFileProvider([configFile(fileId: '4a952bc3-b38c-4486-b317-ace7bc71f539', variable: 'MAVEN_SETTINGS')]) {
-                    container('docker') {
-						sh "echo inside docker container"
-                        withCredentials([usernamePassword(credentialsId: 'nexus-functional-gr-user', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    //container('docker') {
+						
+                        //withCredentials([usernamePassword(credentialsId: 'nexus-functional-gr-user', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+							sh "will start maven build"
                             sh """
-        cd .
-        mvn clean
-        mvn package -s $MAVEN_SETTINGS -DskipTests
+								cd .
+								mvn clean
+								mvn package -s $MAVEN_SETTINGS -DskipTests
 
-        #mvn sonar:sonar -s $MAVEN_SETTINGS
-        """
-                        }
-                    }
+								#mvn sonar:sonar -s $MAVEN_SETTINGS
+							"""
+                        //}
+                    //}
                 //}
             }
         }
