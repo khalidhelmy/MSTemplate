@@ -1,10 +1,7 @@
 pipeline {
-	agent any
-	/*
 	agent {
-        label "docker"
-    }
-	*/
+        	label "docker"
+    	}
     environment {
         //ONLY THESE are lines you can change as the person who develops this app
         ECR_CREDENTIALS_ID = 'ecr:eu-central-1:jenkins-dxl-gr-ecr'
@@ -28,18 +25,18 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
     }
     
-    stages {
-        stage('Java Build') {
-            steps {
+	stages {
+        	stage('Java Build') {
+            		steps {
 				script {
-                    defineEnvironment()
-                }
+                    			defineEnvironment()
+                		}
 				sh """
 					echo current kubernetes namespace: $CURRENT_KUBERNETES_NAMESPACE
 					echo build environment: $BUILD_ENVIRONMENT
 					echo final image name: $FINAL_IMAGE_NAME
 					echo deployment config folder: $DEPLOYMENT_CONFIG_FOLDER
-                """
+                		"""
                 //configFileProvider([configFile(fileId: '4a952bc3-b38c-4486-b317-ace7bc71f539', variable: 'MAVEN_SETTINGS')]) {
                     //container('docker') {
 						
