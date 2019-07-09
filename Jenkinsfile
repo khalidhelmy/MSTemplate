@@ -21,6 +21,7 @@ pipeline {
         stage('Analyze Code') {
             steps {
                 // SonarQube
+		    sh "echo SonarQube"
             }
         }
 		
@@ -67,6 +68,7 @@ pipeline {
             }
             steps {
                 // OC commands to deploy on test ENV
+		    sh "echo Test Deployment"
             }
         }
 		
@@ -78,6 +80,7 @@ pipeline {
             }
             steps {
                 // run automation scripts on test ENV
+		    sh "echo Automation Tests on test ENV"
             }
         }
 		
@@ -89,6 +92,7 @@ pipeline {
             }
             steps {
                 // OC commands to deploy on staging ENV
+		    sh "echo Staging Deployment"
             }
         }
 		
@@ -100,6 +104,7 @@ pipeline {
             }
             steps {
                 // run automation scripts on staging ENV
+		    sh "echo Automation Tests on staging ENV"
             }
         }
 		
@@ -111,6 +116,7 @@ pipeline {
             }
             steps {
                 // OC commands to deploy on production ENV
+		    sh "echo Production Deployment"
             }
         }
     }
