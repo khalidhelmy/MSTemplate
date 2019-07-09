@@ -11,7 +11,7 @@ pipeline {
         stage('Unit Tests') {
             steps {
 				sh """		
-					cd spring-oauth2-employee-service-master
+					cd spring-oauth2-employee-service/spring-oauth2-employee-service-master/
 					mvn clean -X
 					mvn test -X
 				"""
