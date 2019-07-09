@@ -1,0 +1,85 @@
+package com.tsse.controller;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.Resources;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.tsse.controller.enums.Direction;
+import com.tsse.controller.enums.OrderBy;
+import com.tsse.controller.exceptions.ConstraintsViolationException;
+import com.tsse.controller.exceptions.EntityNotFoundException;
+import com.tsse.controller.exceptions.GeneralExcpetion;
+import com.tsse.domainobjects.EmployeeDO;
+import com.tsse.entities.Employee;
+import com.tsse.services.EmployeeService;
+
+@RestController
+@RequestMapping(path = "/api/employees")
+public class EmployeeController {
+
+	@Autowired
+	private EmployeeService employeeService;
+
+	@GetMapping("/{empId}")
+	public Resources<EmployeeDO> getEmployeeAndDepartment(@Valid @PathVariable("empId") final Long empId){
+
+		EmployeeDO emp = employeeService.getEmployeeAndDepartment(empId);
+		List<EmployeeDO> emps = new ArrayList<>();
+		emps.add(emp);
+		
+		Link link = linkTo(methodOn(EmployeeController.class).getEmployeeAndDepartment(empId)).withSelfRel();
+		Resources<EmployeeDO> result = new Resources<>(emps, link);
+		return result;
+		//return new ResponseEntity<>(emp, HttpStatus.OK);
+
+	}
+
+	@GetMapping()
+	public Resources<EmployeeDO> getEmployees(){
+		
+		List<EmployeeDO> emps = employeeService.getEmployeesAndDepartment();
+
+		for (final EmployeeDO emp : emps) {
+			Link selfLink = linkTo(methodOn(EmployeeController.class).getEmployeeAndDepartment(emp.getEmp().getEmpId()))
+					.withSelfRel();
+			emp.add(selfLink);
+		}
+
+		Link link = linkTo(methodOn(EmployeeController.class).getEmployees()).withSelfRel();
+		Resources<EmployeeDO> result = new Resources<>(emps, link);
+		return result;
+	}
+
+	@PutMapping("/{empId}")
+	public ResponseEntity<?> updateResource(@RequestBody EmployeeDO employee, @PathVariable("empId") Long empId) {
+		employeeService.updateEmployeeAndDepartment(empId, employee);
+		return ResponseEntity.ok("resource saved");
+	}
+
+	@PostMapping()
+	public ResponseEntity<?> saveResource(@RequestBody EmployeeDO employee) {
+		employeeService.saveEmployee(employee);
+		return ResponseEntity.ok("resource saved");
+	}
+}

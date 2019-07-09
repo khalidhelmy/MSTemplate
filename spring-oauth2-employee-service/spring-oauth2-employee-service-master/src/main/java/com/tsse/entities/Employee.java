@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.*;
 import org.springframework.hateoas.ResourceSupport;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.tsse.annotations.EmployeeCustomAnnotation;
 
 import lombok.*;
 
@@ -28,19 +29,20 @@ import lombok.*;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Table(name = "employee")
 @JsonRootName("employee")
+@EmployeeCustomAnnotation
 public class Employee extends ResourceSupport { //Resource support class is used fro hypermedia
 	
 	@Id
     @GeneratedValue//(strategy = GenerationType.AUTO)
     private Long empId;
 
-    @Column(nullable = false)
-    @NotNull(message = "firstname cant be null")
+    @Column//(nullable = false)
+    //@NotNull(message = "firstname cant be null")
     @Size(min=2, max=30)
     private String firstName;
 
-    @Column(nullable = false)
-    @NotNull(message = "lastname cant be null")
+    @Column//(nullable = false)
+    //@NotNull(message = "lastname cant be null")
     @Size(min=2, max=30)
     private String lastName;
 

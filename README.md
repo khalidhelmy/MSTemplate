@@ -1,1 +1,32 @@
+# spring-template including e2e example covering the following
+- input validation https://www.baeldung.com/spring-boot-bean-validation 
+- error handling https://www.baeldung.com/exception-handling-for-rest-with-spring
+- filtering(Elements, Arrtibutes), sorting
+- automation tests 
+    - (controller, service)
+	- integration 
+    - parallel execution
+- security  (OIDC)
+	- authentication
+	- authorization (method, url)
+	- token validation
+	- keys storage (on-hold)
+	- PKCE (on-hold)
+- hypermedia
+- generate OpenAPI specs (TBC with Abdo)
+- logging (side cars)
+- tracing (sleuth)
+- local transactional 
+- lombok
+- parallel (TBD RXJava or reactor)
+- complex integration (e.g. 1 API with multible backend calls)
+- events integration with Kafka
+	- logging (using side cars fluent bit)
+	- event sourcing
+	- data processing (on Kafka) low priority
+- spring cache abstracation layer (redis)
 
+- reactor
+- grpc
+- consumer cloud contract
+- CICD pipeline

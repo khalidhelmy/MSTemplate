@@ -1,0 +1,34 @@
+server.port=8090
+
+# Can be set to false to disable security during local development
+rest.security.enabled=true
+rest.security.api-matcher=/api/**
+rest.security.cors.allowed-origins=*
+rest.security.cors.allowed-headers=*
+rest.security.cors.allowed-methods=GET,POST,PUT,PATCH,DELETE,OPTIONS
+rest.security.cors.max-age=3600
+
+rest.security.issuer-uri=http://localhost:9090/auth/realms/master
+security.oauth2.resource.id=employee-service
+security.oauth2.resource.token-info-uri=${rest.security.issuer-uri}/protocol/openid-connect/token/introspect
+security.oauth2.resource.user-info-uri=${rest.security.issuer-uri}/protocol/openid-connect/userinfo
+security.oauth2.resource.jwt.key-value=-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAt+tfEGMycMtEijzzEDGKVcvb1DEEG+k9MRqrXB/nL4fLGepXaioIGTgzURru1URyaRU+xL+8Q4jalic15Nz5TlBcdHsIq8b+bkr5BMl37YSaKRNM+Lw7ZW7mT53h/WRjMDGUOrPVI1Twgcam4kDFuXizJtIX5v/w4W7aRcurx0Fs9eNNVJmUFiinHF9sntGMbJILs5gmnI12fiWZcf0dm+n0pmqcwO3L5bUB4E0i9yp8GBjl+XHtOYP63v+Q8U/vzil1GKLP5t8drnW70vnJQrfHc54CZrJ6hbRCGJaixWXj7AWUbKk+J2HH0GiCESI6xN49PZSRXsr1TMmYSUtz6QIDAQAB\n-----END PUBLIC KEY-----
+
+# To access another secured micro-service
+security.oauth2.client.client-id=employee-service
+security.oauth2.client.client-secret=c5bba5c3-c7c2-4c22-9bab-2fad96e52148
+security.oauth2.client.user-authorization-uri=${rest.security.issuer-uri}/protocol/openid-connect/auth
+security.oauth2.client.access-token-uri=${rest.security.issuer-uri}/protocol/openid-connect/token
+security.oauth2.client.scope=openid
+security.oauth2.client.grant-type=client_credentials
+
+#Dummy data in h2 database
+spring.h2.console.enabled=true
+spring.jpa.show-sql=true
+spring.jpa.hibernate.ddl-auto=create-drop
+
+#Logging Configuration
+logging.level.org.springframework.boot.autoconfigure.logging=INFO
+logging.level.org.springframework.security=DEBUG
+logging.level.org.arun=DEBUG
+logging.level.root=INFO
