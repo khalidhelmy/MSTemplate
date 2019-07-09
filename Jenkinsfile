@@ -33,13 +33,14 @@ pipeline {
 
 				}
             }
+	agent { dockerfile true }
             steps {
-                container('docker') {
+                
 					sh """
 						cp ${WORKSPACE}/Code/mirco-service/target/micro-service-0.0.1-RELEASE.jar .
 						docker build -t ${IMAGE_NAME} .            
 					"""
-                }
+               
             }
         }
 		
