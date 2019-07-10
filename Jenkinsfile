@@ -12,8 +12,8 @@ pipeline {
             steps {
 				sh """		
 					cd spring-oauth2-employee-service/spring-oauth2-employee-service-master/
-					mvn clean -X
-					mvn test -X
+					#mvn clean -X
+					#mvn test -X
 				"""
             }            
         }
