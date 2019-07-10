@@ -21,7 +21,7 @@ pipeline {
         stage('Analyze Code') {
             steps {
                 // SonarQube
-		    sh" mvn sonar:sonar -Dsonar.projectKey=MSTemplate -Dsonar.host.url=http://172.19.106.22:9000 -Dsonar.login=840b7d1c785880796f4fce5da4873e28d763e89b"
+		    sh" mvn sonar:sonar -Dsonar.projectKey=MSTemplate -Dsonar.host.url=http://172.19.106.22:9000 -Dsonar.login=5dafc777e552f22ccc548aa199054ea3131b146f"
             }
         }
 		
