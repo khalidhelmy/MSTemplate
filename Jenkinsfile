@@ -21,6 +21,7 @@ pipeline {
         stage('Analyze Code') {
             steps {
                 // SonarQube
+		    sh" cd spring-oauth2-employee-service/spring-oauth2-employee-service-master/"
 		    sh" mvn sonar:sonar -Dsonar.sources=. -Dsonar.projectKey=MSTemplate -Dsonar.host.url=http://172.19.106.22:9000 -Dsonar.login=5dafc777e552f22ccc548aa199054ea3131b146f"
 		            //sh "/home/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqubescanner/bin/sonar-scanner -Dsonar.host.url=http://192.168.0.14:9000 -Dsonar.projectName=meanstackapp -Dsonar.projectVersion=1.0 -Dsonar.projectKey=meanstack:app -Dsonar.sources=. -Dsonar.projectBaseDir=/home/jenkins/workspace/sonarqube_test_pipeline"
 
