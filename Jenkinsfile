@@ -90,9 +90,11 @@ pipeline {
 					sh "echo Automation Tests on test ENV"
 				  },
 				  b: {
-					sh "echo Performance Tests on test ENV"
-					cd src\main\resources\performance_scripts
-					sh "jmeter -Jjmeter.save.saveservice.output_format=csv -n -t My_VodafoneUK_APIS.jmx -l My_VodafoneUK_APIS.jtl -e -o HTML_Report_1"
+					sh """
+						echo Performance Tests on test ENV
+						cd src\main\resources\performance_scripts
+						jmeter -Jjmeter.save.saveservice.output_format=csv -n -t My_VodafoneUK_APIS.jmx -l My_VodafoneUK_APIS.jtl -e -o HTML_Report_1
+					"""
 				  }
 			)
 		  }
