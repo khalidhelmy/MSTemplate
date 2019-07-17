@@ -92,7 +92,7 @@ pipeline {
 				  b: {
 					sh """
 						echo Performance Tests on test ENV
-						cd src/main/resources/performance_scripts
+						cd spring-oauth2-employee-service/spring-oauth2-employee-service-master/src/main/resources/performance_scripts
 						jmeter -Jjmeter.save.saveservice.output_format=csv -n -t My_VodafoneUK_APIS.jmx -l My_VodafoneUK_APIS.jtl -e -o HTML_Report_1
 					"""
 				  }
