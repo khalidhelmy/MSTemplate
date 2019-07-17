@@ -23,7 +23,7 @@ pipeline {
                 // SonarQube
 		    sh"""
 		    	cd spring-oauth2-employee-service/spring-oauth2-employee-service-master/
-		    	mvn sonar:sonar -Dsonar.sources=. -Dsonar.projectKey=MSTemplate -Dsonar.host.url=http://172.19.106.22:9000 -Dsonar.login=5dafc777e552f22ccc548aa199054ea3131b146f
+		    	#mvn sonar:sonar -Dsonar.sources=. -Dsonar.projectKey=MSTemplate -Dsonar.host.url=http://172.19.106.22:9000 -Dsonar.login=5dafc777e552f22ccc548aa199054ea3131b146f
 		"""
 		            //sh "/home/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqubescanner/bin/sonar-scanner -Dsonar.host.url=http://192.168.0.14:9000 -Dsonar.projectName=meanstackapp -Dsonar.projectVersion=1.0 -Dsonar.projectKey=meanstack:app -Dsonar.sources=. -Dsonar.projectBaseDir=/home/jenkins/workspace/sonarqube_test_pipeline"
 
@@ -41,8 +41,8 @@ pipeline {
             steps {
                 container('docker') {
 					sh """
-						cp ${WORKSPACE}/Code/mirco-service/target/micro-service-0.0.1-RELEASE.jar .
-						docker build -t ${IMAGE_NAME} .            
+						#cp ${WORKSPACE}/Code/mirco-service/target/micro-service-0.0.1-RELEASE.jar .
+						#docker build -t ${IMAGE_NAME} .            
 					"""
                 }
             }
@@ -59,7 +59,7 @@ pipeline {
                 container('docker') {
 					// Push to oc streams
 					sh """
-						docker push ${IMAGE_NAME}
+						#docker push ${IMAGE_NAME}
 					"""
                 }
             }
@@ -84,9 +84,15 @@ pipeline {
 				}
             }
             steps {
-                // run automation scripts on test ENV
-		    sh "echo Automation Tests on test ENV"
-            }
+				parallel(
+				  a: {
+					sh "echo Automation Tests on test ENV"
+				  },
+				  b: {
+					sh "echo Performance Tests on test ENV"
+				  }
+			)
+		  }
         }
 		
 		stage('Staging Deployment') {
