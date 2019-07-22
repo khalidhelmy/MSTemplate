@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC_1</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>f3957d00-93b6-4976-9754-d3b08a4930b7</testCaseGuid>
+   <variable>
+      <defaultValue>''</defaultValue>
+      <description></description>
+      <id>242a5cd2-8cb5-45e6-85d6-3f24891339ba</id>
+      <masked>false</masked>
+      <name>page_Title</name>
+   </variable>
+</TestCaseEntity>
