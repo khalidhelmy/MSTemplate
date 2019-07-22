@@ -98,8 +98,7 @@ pipeline {
 					sh """
 						echo Performance Tests on test ENV
 						cd spring-oauth2-employee-service/spring-oauth2-employee-service-master/src/main/resources/performance_scripts
-						/opt/apache-jmeter-5.1.1/bin/./jmeter -Jjmeter.save.saveservice.output_format=xml -n -t My_VodafoneUK_APIS.jmx -l /var/jenkins_home/sherif_reports/My_VodafoneUK_APIS.jtl
-						cd /var/jenkins_home/sherif_reports/
+						/opt/apache-jmeter-5.1.1/bin/./jmeter -Jjmeter.save.saveservice.output_format=xml -n -t My_VodafoneUK_APIS.jmx -l My_VodafoneUK_APIS.jtl
 						curl -F file=@My_VodafoneUK_APIS.jtl -F channels=jenkins https://slack.com/api/files.upload?token=xoxp-656256467409-662264616100-704246953126-cd707db69de8111d882b04bc68570ea5
 					"""
 				  }
