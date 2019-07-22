@@ -1,8 +1,5 @@
 pipeline {
-	agent {
-		any
-		//label 'docker'
-	}
+	agent any
 	
 	environment {
 		IMAGE_NAME = 'Test'	
