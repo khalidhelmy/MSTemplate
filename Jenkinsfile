@@ -87,12 +87,12 @@ pipeline {
             steps {
 				parallel(
 				  a: {
-				  /*
+				  
 					sh """
 						echo Automation Tests on test ENV
-						katalon -noSplash  -runMode=console -consoleLog -noExit -projectPath="spring-oauth2-employee-service/spring-oauth2-employee-service-master/src/main/resources/automation_scripts/DXLEG-POC/DXLEG-POC.prj" -retry=0 -testSuitePath="Test Suites/New Test Suite" -executionProfile="default" -browserType="Chrome"
+						#katalon -noSplash  -runMode=console -consoleLog -noExit -projectPath="spring-oauth2-employee-service/spring-oauth2-employee-service-master/src/main/resources/automation_scripts/DXLEG-POC/DXLEG-POC.prj" -retry=0 -testSuitePath="Test Suites/New Test Suite" -executionProfile="default" -browserType="Chrome"
 					"""
-					*/
+					
 				  },
 				  b: {
 					sh """
