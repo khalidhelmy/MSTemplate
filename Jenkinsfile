@@ -1,5 +1,7 @@
 pipeline {
-	agent any
+	agent {
+		label 'docker'
+	}
 	
 	environment {
 		IMAGE_NAME = 'Test'	
@@ -8,12 +10,6 @@ pipeline {
     stages {
         stage('Unit Tests') {
             steps {
-				sh """
-						echo Automation Tests on test ENV
-						katalon -noSplash  -runMode=console -consoleLog -noExit -projectPath="spring-oauth2-employee-service/spring-oauth2-employee-service-master/src/main/resources/automation_scripts/DXLEG-POC/DXLEG-POC.prj" -retry=0 -testSuitePath="Test Suites/New Test Suite" -executionProfile="default" -browserType="Chrome"
-						echo DONE Automation Tests on test ENV
-					"""
-				
 				sh """		
 					cd spring-oauth2-employee-service/spring-oauth2-employee-service-master/
 					#mvn clean -X
@@ -91,12 +87,12 @@ pipeline {
             steps {
 				parallel(
 				  a: {
-				  
+				  /*
 					sh """
 						echo Automation Tests on test ENV
-						
+						katalon -noSplash  -runMode=console -consoleLog -noExit -projectPath="spring-oauth2-employee-service/spring-oauth2-employee-service-master/src/main/resources/automation_scripts/DXLEG-POC/DXLEG-POC.prj" -retry=0 -testSuitePath="Test Suites/New Test Suite" -executionProfile="default" -browserType="Chrome"
 					"""
-					
+					*/
 				  },
 				  b: {
 					sh """
