@@ -98,7 +98,7 @@ pipeline {
 					sh """
 						echo Performance Tests on test ENV
 						cd spring-oauth2-employee-service/spring-oauth2-employee-service-master/src/main/resources/performance_scripts
-						jmeter -Jjmeter.save.saveservice.output_format=xml -n -t My_VodafoneUK_APIS.jmx -l /var/jenkins_home/sherif_reports/My_VodafoneUK_APIS.jtl
+						/opt/apache-jmeter-5.1.1/bin/./jmeter -Jjmeter.save.saveservice.output_format=xml -n -t My_VodafoneUK_APIS.jmx -l /var/jenkins_home/sherif_reports/My_VodafoneUK_APIS.jtl
 					"""
 				  }
 			)
