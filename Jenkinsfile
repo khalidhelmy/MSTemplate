@@ -95,14 +95,16 @@ pipeline {
 					
 				  },
 				  b: {
-					sh """
-						echo Performance Tests on test ENV
-						cd spring-oauth2-employee-service/spring-oauth2-employee-service-master/src/main/resources/performance_scripts
-						#mkdir results
-						/opt/apache-jmeter-5.1.1/bin/./jmeter -Jjmeter.save.saveservice.output_format=csv -n -t My_VodafoneUK_APIS.jmx -l My_VodafoneUK_APIS.jtl -e -o results
-						cd results
-						curl -F file=@My_VodafoneUK_APIS.jtl -H ${env.SLACK_TOKEN} -F channels=jenkins https://slack.com/api/files.upload?pretty=1
-					"""
+					withCredentials([usernamePassword(credentialsId: 'slack_token', passwordVariable: 'token', usernameVariable: 'user')]) {
+						sh """
+							echo Performance Tests on test ENV
+							cd spring-oauth2-employee-service/spring-oauth2-employee-service-master/src/main/resources/performance_scripts
+							#mkdir results
+							/opt/apache-jmeter-5.1.1/bin/./jmeter -Jjmeter.save.saveservice.output_format=csv -n -t My_VodafoneUK_APIS.jmx -l My_VodafoneUK_APIS.jtl -e -o result
+							cd result
+							curl -F file=@My_VodafoneUK_APIS.jtl -H $token -F channels=jenkins https://slack.com/api/files.upload?pretty=1
+						"""
+					}
 				  }
 			)
 		  }
